@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K M Sagar Nag - Portfolio</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header and Navigation */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background-color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0 50px;
+            min-height: 100vh;
+            display: none;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        /* Home Section */
+        #home {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin-bottom: 2rem;
+            object-fit: cover;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 2rem 0;
+        }
+
+        .skill-tag {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .cta-buttons {
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary-color);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Resume Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            margin: 10px auto;
+        }
+
+        .resume-section {
+            background-color: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .resume-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-color);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .skill-category ul {
+            list-style-type: none;
+        }
+
+        .skill-category li {
+            padding: 8px 0;
+            border-bottom: 1px dotted var(--light-color);
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .skill-category li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--light-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid var(--secondary-color);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .timeline-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .timeline-content .date {
+            color: var(--secondary-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .download-btn {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        /* Bio Data Section */
+        .bio-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .bio-image {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .bio-image .profile-img {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto;
+        }
+
+        .bio-details {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .bio-section {
+            margin-bottom: 30px;
+        }
+
+        .bio-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--light-color);
+        }
+
+        .bio-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .bio-table td {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--light-color);
+        }
+
+        .bio-table td:first-child {
+            width: 150px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .hobbies-list {
+            list-style-type: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .hobbies-list li {
+            background-color: var(--light-color);
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .hobbies-list li:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 50px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                padding: 1rem 0;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0;
+                text-align: center;
+                padding: 10px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item::after {
+                left: 21px;
+            }
+
+            .timeline-item:nth-child(odd)::after,
+            .timeline-item:nth-child(even)::after {
+                left: 21px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">K M Sagar Nag</div>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link active" data-target="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-target="resume">Resume</a></li>
+                    <li><a href="#" class="nav-link" data-target="bio">Bio-Data</a></li>
+                </ul>
+                <div class="hamburger">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="active">
+        <div class="container">
+            <div class="hero-content">
+                <img src="https://media.licdn.com/dms/image/v2/D4D03AQHFLs6cZ2_kvg/profile-displayphoto-crop_800_800/B4DZq0dCsfH0AI-/0/1763964105063?e=1766016000&v=beta&t=fuQLOb_SKax9mvgLoV4yHml2Q-tDHWQO0EEqRSMdeKg" alt="K M Sagar Nag" class="profile-img">
+                <h1>K M Sagar Nag</h1>
+                <p>Computer Science Student at JNNCE, currently in 5th semester. Passionate about programming and technology.</p>
+                
+                <div class="skills">
+                    <span class="skill-tag">C Programming</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">HTML/CSS</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">GitHub</span>
+                </div>
+                
+                <div class="cta-buttons">
+                    <a href="#" class="btn nav-link" data-target="resume">View Resume</a>
+                    <a href="#" class="btn nav-link" data-target="bio">View Bio-Data</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume">
+        <div class="container">
+            <h1 class="section-title">My Resume</h1>
+            
+            <div class="resume-section">
+                <h2>Professional Summary</h2>
+                <p>Computer Science student at JNNCE with strong foundation in programming principles. Currently in 5th semester with knowledge of C, Java, HTML, JavaScript, SQL, and GitHub. Eager to apply academic knowledge to real-world challenges and continue learning new technologies.</p>
+            </div>
+            
+            <div class="resume-section">
+                <h2>Technical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Programming Languages</h3>
+                        <ul>
+                            <li>C (Intermediate)</li>
+                            <li>Java (Intermediate)</li>
+                            <li>JavaScript (Basic)</li>
+                            <li>SQL (Basic)</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Web Technologies</h3>
+                        <ul>
+                            <li>HTML5</li>
+                            <li>CSS3</li>
+                            <li>Responsive Design</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Tools & Platforms</h3>
+                        <ul>
+                            <li>Git & GitHub</li>
+                            <li>VS Code</li>
+                            <li>Eclipse</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="resume-section">
+                <h2>Education</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Bachelor of Engineering in Computer Science</h3>
+                            <p class="date">2022 - Present</p>
+                            <p>Jawaharlal Nehru National College of Engineering (JNNCE), Shimoga</p>
+                            <p>Currently in 5th Semester</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Pre-University Course (PUC)</h3>
+                            <p class="date">2020 - 2022</p>
+                            <p>Completed PUC with focus on Science stream</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="resume-section">
+                <h2>Academic Focus</h2>
+                <p>Currently focusing on core computer science subjects including Data Structures, Algorithms, Database Management Systems, and Object-Oriented Programming. Actively developing programming skills through coursework and self-study.</p>
+            </div>
+            
+            <div class="download-btn">
+                <a href="#" class="btn" id="downloadBtn">Download Resume (PDF)</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bio-Data Section -->
+    <section id="bio">
+        <div class="container">
+            <h1 class="section-title">Personal Bio-Data</h1>
+            
+            <div class="bio-container">
+                <div class="bio-image">
+                    <img src="https://media.licdn.com/dms/image/v2/D4D03AQHFLs6cZ2_kvg/profile-displayphoto-shrink_400_400/B4DZq0dCsfH0Ac-/0/1763964105159?e=1766016000&v=beta&t=buYyBd_1vuywdfUvoKQiwHmmMcWESOX71uvsymD29VU" alt="K M Sagar Nag" class="profile-img">
+                </div>
+                
+                <div class="bio-details">
+                    <div class="bio-section">
+                        <h2>Personal Information</h2>
+                        <table class="bio-table">
+                            <tr>
+                                <td>Full Name:</td>
+                                <td>K M Sagar Nag</td>
+                            </tr>
+                            <tr>
+                                <td>Age:</td>
+                                <td>20 years</td>
+                            </tr>
+                            <tr>
+                                <td>Date of Birth:</td>
+                                <td>2004</td>
+                            </tr>
+                            <tr>
+                                <td>Email:</td>
+                                <td>sagar.nag@example.com</td>
+                            </tr>
+                            <tr>
+                                <td>Phone:</td>
+                                <td>+91 XXXXX XXXXX</td>
+                            </tr>
+                            <tr>
+                                <td>Address:</td>
+                                <td>Shimoga, Karnataka, India</td>
+                            </tr>
+                            <tr>
+                                <td>Nationality:</td>
+                                <td>Indian</td>
+                            </tr>
+                            <tr>
+                                <td>Languages:</td>
+                                <td>English, Hindi</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="bio-section">
+                        <h2>About Me</h2>
+                        <p>I am a dedicated Computer Science student currently pursuing my engineering degree at JNNCE. My journey in technology began with curiosity about how software works, and it has grown into a passion for programming and problem-solving.</p>
+                        <p>As I progress through my 5th semester, I'm building a strong foundation in computer science fundamentals. I believe in continuous learning and always look for opportunities to expand my knowledge and skills in the field of technology.</p>
+                    </div>
+                    
+                    <div class="bio-section">
+                        <h2>Interests & Hobbies</h2>
+                        <ul class="hobbies-list">
+                            <li>Programming</li>
+                            <li>Technology Trends</li>
+                            <li>Problem Solving</li>
+                            <li>Learning New Skills</li>
+                            <li>Reading</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 K M Sagar Nag. All rights reserved.</p>
+            <p>Email: sagar.nag@example.com | Location: Shimoga, Karnataka</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+            const hamburger = document.querySelector('.hamburger');
+            const navLinksContainer = document.querySelector('.nav-links');
+            
+            // Navigation click handler
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('data-target');
+                    
+                    // Update active nav link
+                    navLinks.forEach(navLink => navLink.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show target section
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                        if (section.id === targetId) {
+                            section.classList.add('active');
+                        }
+                    });
+                    
+                    // Close mobile menu if open
+                    if (navLinksContainer.classList.contains('active')) {
+                        navLinksContainer.classList.remove('active');
+                    }
+                    
+                    // Scroll to top
+                    window.scrollTo(0, 0);
+                });
+            });
+            
+            // Hamburger menu toggle
+            hamburger.addEventListener('click', function() {
+                navLinksContainer.classList.toggle('active');
+            });
+            
+            // Download button functionality
+            const downloadBtn = document.getElementById('downloadBtn');
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('In a real implementation, this would download your resume PDF. For now, you can replace this with a link to your actual PDF file.');
+                });
+            }
+            
+            // Set home as active by default
+            document.querySelector('.nav-link[data-target="home"]').click();
+        });
+    </script>
+</body>
+</html>
